@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiet Echoes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-stage">
+        <div id="bg-layer"></div>
+
+        <div id="sprite-container">
+            <img id="main-character" src="Front_view-removebg-preview.png" alt="Hero">
+        </div>
+
+        <div id="ui-layer">
+            <div class="stats">
+                <div>Confidence: <span id="stat-conf">10</span></div>
+                <div>Affection: <span id="stat-love">0</span></div>
+                <div>Wallet: $<span id="stat-money">40</span></div>
+            </div>
+
+            <div id="dialogue-box">
+                <h3 id="speaker-name">Ren</h3>
+                <p id="text-content">...</p>
+                <div id="choice-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="language-selector">
+        <button onclick="changeLanguage('en')">EN</button>
+        <button onclick="changeLanguage('hi')">HI</button>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="game.js"></script>
+
+</body>
+</html>

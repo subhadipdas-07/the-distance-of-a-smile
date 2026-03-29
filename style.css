@@ -1,0 +1,24 @@
+#choice-list {
+    transition: opacity 0.5s ease-in; /* Smooth reveal */
+}
+
+/* Add a slight "breathing" animation to the character sprite */
+#main-character {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Styling for the speaker name to look like a badge */
+#speaker-name {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 2px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}

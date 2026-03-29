@@ -1,0 +1,43 @@
+// translations.js
+const i18n = {
+    en: {
+        stats: { conf: "Confidence", money: "Money" },
+        chapter_1_start: {
+            speaker: "Ren (Me)",
+            text: "There she is... Maya. She's reading by the fountain. My heart is doing that annoying thumping thing again.",
+            choice1: "Approach her (Cost: $5)",
+            choice2: "Stay back and watch"
+        },
+        approach_maya: {
+            speaker: "Ren",
+            text: "I bought two coffees. My hands are shaking. 'Hey Maya... I, uh, got you this.'",
+            choice1: "Smile and sit down",
+            choice2: "Apologize and leave"
+        },
+        stay_back: {
+            speaker: "Inner Thought",
+            text: "I missed the chance. I'll just go home and overthink this for hours.",
+            choice1: "Try again tomorrow"
+        }
+    },
+    hi: {
+        stats: { conf: "आत्मविश्वास", money: "पैसे" },
+        chapter_1_start: {
+            speaker: "रेन (मैं)",
+            text: "वो रही... माया। वो फाउंटेन के पास पढ़ रही है। मेरा दिल फिर से ज़ोरों से धड़क रहा है।",
+            choice1: "उसके पास जाओ ($5)",
+            choice2: "पीछे हट जाओ"
+        },
+        approach_maya: {
+            speaker: "रेन",
+            text: "मैंने दो कॉफ़ी खरीदीं। मेरे हाथ कांप रहे हैं। 'हे माया... मैं, उह, तुम्हारे लिए यह लाया हूँ।'",
+            choice1: "मुस्कुराओ और बैठो",
+            choice2: "माफी मांगो और निकलो"
+        },
+        stay_back: {
+            speaker: "मन की बात",
+            text: "मैंने मौका गंवा दिया। अब घर जाकर घंटों इसके बारे में सोचूंगा।",
+            choice1: "कल फिर कोशिश करें"
+        }
+    }
+};

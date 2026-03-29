@@ -1,0 +1,102 @@
+// game.js
+
+// 1. Initial State
+let currentLang = 'en'; 
+let isTyping = false;
+let typeInterval = null;
+
+let gameState = {
+    confidence: 15,
+    affection: 0,
+    money: 40,
+    currentScene: 'chapter_1_start'
+};
+
+// 2. Scene Data (Structure only, text comes from translations.js)
+const storyData = {
+    'chapter_1_start': {
+        sprite: 'Side_view-removebg-preview.png',
+        choices: [
+            { next: 'approach_maya', minMoney: 5, effects: { confidence: +10, money: -5 } },
+            { next: 'stay_back', effects: { confidence: -5 } }
+        ]
+    },
+    'approach_maya': {
+        sprite: 'Front_view-removebg-preview.png',
+        choices: [
+            { next: 'chapter_1_start', effects: { affection: +15 } }, // Simplified for demo
+            { next: 'stay_back', effects: { confidence: -10 } }
+        ]
+    },
+    'stay_back': {
+        sprite: 'Side_view-removebg-preview.png',
+        choices: [{ next: 'chapter_1_start' }]
+    }
+};
+
+// 3. The Typewriter Engine
+function typeWriter(text, element) {
+    clearInterval(typeInterval);
+    isTyping = true;
+    element.innerText = "";
+    let i = 0;
+    typeInterval = setInterval(() => {
+        if (i < text.length) {
+            element.innerText += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typeInterval);
+            isTyping = false;
+        }
+    }, 30);
+}
+
+// 4. The core update function
+function updateGame(sceneKey) {
+    const scene = storyData[sceneKey];
+    const content = i18n[currentLang][sceneKey]; // Fetch translation
+    
+    gameState.currentScene = sceneKey;
+    localStorage.setItem('game_save', JSON.stringify(gameState));
+
+    // Update DOM Elements
+    document.getElementById('stat-conf').innerText = gameState.confidence;
+    document.getElementById('stat-money').innerText = gameState.money;
+    document.getElementById('main-character').src = scene.sprite;
+    document.getElementById('speaker-name').innerText = content.speaker;
+
+    // Start Typing
+    typeWriter(content.text, document.getElementById('text-content'));
+
+    // Render Choices
+    const choiceList = document.getElementById('choice-list');
+    choiceList.innerHTML = '';
+    scene.choices.forEach((choice, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.innerText = content[`choice${index + 1}`]; // Get choice text
+        
+        btn.onclick = () => {
+            if (isTyping) return;
+            if (choice.effects) {
+                gameState.confidence += (choice.effects.confidence || 0);
+                gameState.money += (choice.effects.money || 0);
+            }
+            updateGame(choice.next);
+        };
+        choiceList.appendChild(btn);
+    });
+}
+
+// 5. Language Switcher Function
+function changeLanguage(lang) {
+    currentLang = lang;
+    updateGame(gameState.currentScene);
+}
+
+// 6. Bootstrap Game
+window.onload = () => {
+    const saved = localStorage.getItem('game_save');
+    if (saved) gameState = JSON.parse(saved);
+    updateGame(gameState.currentScene);
+};
